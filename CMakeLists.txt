@@ -10,6 +10,9 @@ set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "-std=c++14")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
+# Uncomment line below if you have downloaded cv_bridge from source and you are facing issues do to multiple version of OpenCV
+# set(cv_bridge_DIR /usr/local/share/cv_bridge/cmake)
+
 find_package (catkin REQUIRED COMPONENTS
    roscpp
    rospy
@@ -21,7 +24,8 @@ find_package (catkin REQUIRED COMPONENTS
    message_generation
 )
 
-find_package(OpenCV REQUIRED)
+
+find_package(OpenCV 4.6 REQUIRED)
 MESSAGE("OPENCV VERSION:")
 MESSAGE(${OpenCV_VERSION})
 
@@ -56,6 +60,7 @@ set(LIBS
    ${OpenCV_LIBS}
 )
 
+message(status ${OpenCV_LIBS})
 # mono node
 add_executable (${PROJECT_NAME}_mono
    src/mono_node.cc
